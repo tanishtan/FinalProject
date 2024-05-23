@@ -476,5 +476,40 @@ namespace FinalProject.DataAccess
                 CloseConnection();
             }
         }
+
+        public int FetchNoOfEnquiriesFromSignUp()
+        {
+            var sql20 = "Select count(*) from EnquiryLogin where isActive=1";
+            using (var reader20 = ExecuteReader(
+                  sqltext: sql20,
+                  commandType: CommandType.Text
+                  ))
+            {
+                int rows = 0;
+
+                while (reader20.Read())
+                {
+                    rows = reader20.GetInt32(0);
+                }
+
+                if (!reader20.IsClosed)
+                {
+                    reader20.Close();
+                }
+                return rows;
+            }
+            return 0;
+        }
+
+        public void makeIsActiveTrueInEqnuiryLoginAfterSubmit()
+        {
+            var sql20 = "UPDATE EnquiryLogin SET isActive=1 where email=@email";
+            var email = "athish3@gmail.com";
+            ExecuteNonQuery(
+            sqltext: sql20,
+            commandType: CommandType.Text,
+            new SqlParameter("@email", email)
+            );
+        }
     }
 }
