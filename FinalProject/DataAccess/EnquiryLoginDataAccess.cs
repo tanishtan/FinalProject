@@ -23,7 +23,7 @@ namespace FinalProject.DataAccess
                   sqltext: sql1,
                   commandType: CommandType.Text,
                   new SqlParameter("@email1", email1)
-                  ))
+                  )) 
             {
 
 
