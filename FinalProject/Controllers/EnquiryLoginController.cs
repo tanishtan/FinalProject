@@ -84,14 +84,7 @@ namespace FinalProject.Controllers
             }
         }
 
-        private byte[] ConvertToBytes(IFormFile file)
-        {
-            using (MemoryStream memoryStream = new MemoryStream())
-            {
-                file.CopyTo(memoryStream);
-                return memoryStream.ToArray();
-            }
-        }
+        
 
         [HttpPost(template: "CreateDocuments")]
         public IActionResult CreateDocuments(Document model)
@@ -99,9 +92,9 @@ namespace FinalProject.Controllers
 
             try
             {
-                byte[] photoBytes = ConvertToBytes(model.Photo);
-                byte[] aadharBytes = ConvertToBytes(model.Aadhar);
-                byte[] pancardBytes = ConvertToBytes(model.PanCard);
+                byte[] photoBytes = Utility.ConvertToBytes(model.Photo);
+                byte[] aadharBytes = Utility.ConvertToBytes(model.Aadhar);
+                byte[] pancardBytes = Utility.ConvertToBytes(model.PanCard);
 
 
                 _process.CreateDocuments(
